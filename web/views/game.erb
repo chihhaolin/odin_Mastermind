@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="game-header">
+    <h2><%= @game.role == 'guesser' ? 'You are the Guesser' : 'You are the Code Maker' %></h2>
+    <span class="turns-badge">Turn <%= @game.turns_used + (@game.status == 'playing' ? 0 : 0) %> / <%= @game.max_turns %></span>
+  </div>
+
+  <%# ── Error message ─────────────────────────────────────────── %>
+  <% if @game.error %>
+    <p class="error"><%= @game.error %></p>
+  <% end %>
+
+  <%# ── End-of-game banner ─────────────────────────────────────── %>
+  <% if @game.status != 'playing' %>
+    <div class="banner <%= @game.status %>">
+      <% if @game.status == 'won' %>
+        <% if @game.role == 'guesser' %>
+          You cracked the code! Solved in <strong><%= @game.turns_used %></strong> turn(s).
+        <% else %>
+          The computer cracked your code <strong><%= @game.secret %></strong> in <strong><%= @game.turns_used %></strong> turn(s)!
+        <% end %>
+      <% else %>
+        <% if @game.role == 'guesser' %>
+          Out of turns. The secret code was <strong><%= @game.secret %></strong>.
+        <% else %>
+          Your code <strong><%= @game.secret %></strong> survived all 12 turns! The computer failed.
+        <% end %>
+      <% end %>
+    </div>
+    <form action="/game/reset" method="post" style="margin-top:1rem;">
+      <button type="submit" class="btn btn-primary">Play Again</button>
+    </form>
+  <% end %>
+
+  <%# ── History board ───────────────────────────────────────────── %>
+  <% unless @game.board_rows.empty? %>
+    <table class="board">
+      <thead>
+        <tr>
+          <th>Turn</th>
+          <th>Guess</th>
+          <th>Exact</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @game.board_rows.each do |row| %>
+          <tr>
+            <td><%= row[:turn] %></td>
+            <td class="guess-cells">
+              <% row[:guess].chars.each do |c| %>
+                <span class="color-pill <%= c %>"><%= c %></span>
+              <% end %>
+            </td>
+            <td><%= row[:exact] %> &#9670;</td>
+            <td><%= row[:color] %> &#9675;</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <%# ── Action area (only when playing) ─────────────────────────── %>
+  <% if @game.status == 'playing' %>
+    <% if @game.role == 'guesser' %>
+      <form action="/game/guess" method="post" class="guess-form">
+        <label for="guess">Your guess (4 colors):</label>
+        <input type="text"
+               name="guess"
+               id="guess"
+               maxlength="4"
+               placeholder="e.g. RGYB"
+               autocomplete="off"
+               autofocus
+               required>
+        <button type="submit" class="btn btn-primary">Submit Guess</button>
+      </form>
+    <% else %>
+      <form action="/game/computer" method="post" class="computer-form">
+        <p class="hint">The computer is analysing your code...</p>
+        <button type="submit" class="btn btn-secondary">Let Computer Guess</button>
+      </form>
+    <% end %>
+  <% end %>
+</div>

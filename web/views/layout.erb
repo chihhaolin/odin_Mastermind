@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastermind</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>MASTERMIND</h1>
+    <nav>
+      <form action="/game/reset" method="post">
+        <button type="submit" class="btn-link">New Game</button>
+      </form>
+    </nav>
+  </header>
+
+  <main>
+    <%= yield %>
+  </main>
+
+  <footer>
+    <p>Colors: <span class="color-pill R">R</span> <span class="color-pill G">G</span> <span class="color-pill B">B</span> <span class="color-pill Y">Y</span> <span class="color-pill O">O</span> <span class="color-pill P">P</span></p>
+  </footer>
+</body>
+</html>

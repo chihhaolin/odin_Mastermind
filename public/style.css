@@ -1,0 +1,230 @@
+/* ── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+header {
+  background: #16213e;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #0f3460;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  letter-spacing: .2em;
+  color: #e94560;
+}
+
+/* ── Main ───────────────────────────────────────────────────── */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: .85rem;
+  color: #888;
+  background: #16213e;
+  border-top: 1px solid #0f3460;
+}
+
+/* ── Card ───────────────────────────────────────────────────── */
+.card {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 640px;
+  height: fit-content;
+}
+
+.card h2 {
+  color: #e94560;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: .55rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: filter .15s;
+}
+.btn:hover { filter: brightness(1.15); }
+
+.btn-primary   { background: #e94560; color: #fff; }
+.btn-secondary { background: #0f3460; color: #e0e0e0; border: 1px solid #e94560; }
+.btn-link      { background: none; border: none; color: #e94560; cursor: pointer; font-size: 1rem; }
+.btn-link:hover { text-decoration: underline; }
+
+/* ── Color pills ────────────────────────────────────────────── */
+.color-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: .85rem;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+.color-pill.R { background: #e74c3c; }
+.color-pill.G { background: #2ecc71; }
+.color-pill.B { background: #3498db; }
+.color-pill.Y { background: #f1c40f; color: #333; text-shadow: none; }
+.color-pill.O { background: #e67e22; }
+.color-pill.P { background: #9b59b6; }
+
+/* ── Color legend ───────────────────────────────────────────── */
+.color-legend {
+  margin-bottom: 1.5rem;
+}
+.color-legend table { border-spacing: .4rem; }
+.color-legend td { text-align: center; }
+.color-name { font-size: .75rem; color: #aaa; }
+
+/* ── Role cards ─────────────────────────────────────────────── */
+.role-choices {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 520px) {
+  .role-choices { grid-template-columns: 1fr; }
+}
+
+.role-card {
+  background: #0f3460;
+  border-radius: 8px;
+  padding: 1.2rem;
+}
+.role-card h3 { margin-bottom: .4rem; font-size: 1rem; }
+.role-card p  { font-size: .85rem; color: #aaa; margin-bottom: .8rem; }
+.role-card label {
+  display: block;
+  font-size: .85rem;
+  margin-bottom: .3rem;
+  color: #aaa;
+}
+.role-card input[type="text"] {
+  width: 100%;
+  padding: .45rem .7rem;
+  border-radius: 5px;
+  border: 1px solid #e94560;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-size: 1rem;
+  margin-bottom: .6rem;
+  letter-spacing: .12em;
+}
+
+/* ── Game header ─────────────────────────────────────────────── */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.turns-badge {
+  background: #0f3460;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: .25rem .9rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: #e94560;
+}
+
+/* ── Board table ─────────────────────────────────────────────── */
+.board {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.4rem;
+}
+.board th, .board td {
+  padding: .5rem .7rem;
+  text-align: center;
+  border-bottom: 1px solid #0f3460;
+}
+.board th {
+  font-size: .8rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.board tr:last-child td { border-bottom: none; }
+.guess-cells { display: flex; gap: .3rem; justify-content: center; }
+
+/* ── Guess form ─────────────────────────────────────────────── */
+.guess-form, .computer-form {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+}
+.guess-form label {
+  font-size: .85rem;
+  color: #aaa;
+  width: 100%;
+}
+.guess-form input[type="text"] {
+  padding: .5rem .8rem;
+  border-radius: 6px;
+  border: 1px solid #e94560;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  letter-spacing: .18em;
+  width: 8rem;
+}
+
+/* ── Banners ────────────────────────────────────────────────── */
+.banner {
+  border-radius: 8px;
+  padding: .9rem 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.banner.won  { background: #1a4a2e; border: 1px solid #2ecc71; color: #2ecc71; }
+.banner.lost { background: #4a1a1a; border: 1px solid #e74c3c; color: #e74c3c; }
+
+/* ── Error ──────────────────────────────────────────────────── */
+.error {
+  background: #4a1a1a;
+  border: 1px solid #e94560;
+  border-radius: 6px;
+  padding: .6rem 1rem;
+  margin-bottom: .9rem;
+  color: #e94560;
+  font-size: .9rem;
+}
+
+/* ── Hint ───────────────────────────────────────────────────── */
+.hint { color: #aaa; font-size: .9rem; }

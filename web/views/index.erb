@@ -1,0 +1,50 @@
+<div class="card">
+  <h2>Choose Your Role</h2>
+
+  <% if @error %>
+    <p class="error"><%= @error %></p>
+  <% end %>
+
+  <div class="color-legend">
+    <table>
+      <tr>
+        <% %w[R G B Y O P].each do |c| %>
+          <td><span class="color-pill <%= c %>"><%= c %></span></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% %w[Red Green Blue Yellow Orange Purple].each do |name| %>
+          <td class="color-name"><%= name %></td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+
+  <div class="role-choices">
+    <div class="role-card">
+      <h3>I am the Guesser</h3>
+      <p>Computer sets the code. You have 12 turns to crack it.</p>
+      <form action="/game/start" method="post">
+        <input type="hidden" name="role" value="1">
+        <button type="submit" class="btn btn-primary">Play as Guesser</button>
+      </form>
+    </div>
+
+    <div class="role-card">
+      <h3>I am the Code Maker</h3>
+      <p>You set the code. Computer tries to guess it in 12 turns.</p>
+      <form action="/game/start" method="post" id="maker-form">
+        <input type="hidden" name="role" value="2">
+        <label for="secret">Your secret code (4 colors, e.g. RGYB):</label>
+        <input type="text"
+               name="secret"
+               id="secret"
+               maxlength="4"
+               placeholder="RGYB"
+               autocomplete="off"
+               required>
+        <button type="submit" class="btn btn-primary">Play as Code Maker</button>
+      </form>
+    </div>
+  </div>
+</div>

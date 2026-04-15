@@ -6,8 +6,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 bundle install                              # install dependencies
-ruby main.rb                               # run the game
-bundle exec rspec                          # run all tests
+
+# CLI
+ruby main.rb                               # run the CLI game
+
+# Web
+bundle exec rackup config.ru -p 4567       # start web server (localhost:4567)
+ruby web/app.rb                            # alternative: run Sinatra directly
+
+# Tests
+bundle exec rspec                          # run all tests (CLI + Web)
+bundle exec rspec spec/web/                # web tests only
 bundle exec rspec spec/feedback_spec.rb    # run a single spec file
 bundle exec rspec --format documentation   # verbose test output
 ```
